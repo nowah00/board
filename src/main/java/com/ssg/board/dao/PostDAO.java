@@ -1,9 +1,6 @@
 package com.ssg.board.dao;
 
 import com.ssg.board.dto.PostDTO;
-import lombok.Builder;
-import lombok.Getter;
-
 import java.util.List;
 import java.util.Optional;
 
