@@ -25,4 +25,16 @@ public class ServiceTests {
         long key = postService.write(postDTO);
         System.out.println(key);
     }
+
+    @Test
+    public void testUpdateService() {
+        PostDTO postDTO = PostDTO.builder()
+                .postId(5L)
+                .title("테스트용 포스팅")
+                .content("포스팅 테스트입니다. 수정합니다.")
+                .writer("고하원")
+                .passphrase("원숭이")
+                .build();
+        postService.edit(postDTO, postDTO.getPassphrase());
+    }
 }

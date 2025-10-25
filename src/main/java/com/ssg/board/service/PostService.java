@@ -30,11 +30,19 @@ public enum PostService {
         }
     }
 
+    // 비번검증 + 수정
+    public void edit(PostDTO post, String passphrase) {
+        if(dao.checkPassphrase(post.getPostId(), passphrase)){
+            log.info("[권한 확인 완료]");
+            if (dao.update(post)){
+                log.info("[" + post.getPostId() + " 수정 완료]");
+            } else {
+                log.info("[수정 실패]");
+            }
+        } else {
+            log.info("[권한 확인 실패]");
+        }
+    }
 
-
-
-
-
-//    public void edit(PostDTO post, String passphrase) { ... }  // 비번검증 + 수정
 //    public void remove(long id, String passphrase) { ... }     // 비번검증 + 삭제
 }
