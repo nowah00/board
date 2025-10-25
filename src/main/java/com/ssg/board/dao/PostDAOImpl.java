@@ -7,24 +7,47 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Log4j2
 public class PostDAOImpl implements PostDAO {
     @Override
-    public List<PostDTO> findAll(int page, int size) {
-        return null;
-    }
+    public List<PostDTO> findAll() {
+        log.info("[findAll() 호출]");
 
-    @Override
-    public boolean countAll() {
-        return false;
+        String sql = "select * from board_post";
+
+        try (Connection connection = ConnectionUtil.INSTANCE.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+             ResultSet resultSet = preparedStatement.executeQuery()
+        ) {
+            List<PostDTO> posts = new ArrayList<>();
+            while (resultSet.next()) {
+                PostDTO post = new PostDTO();
+                post.setPostId(resultSet.getLong("post_id"));
+                post.setTitle(resultSet.getString("title"));
+                post.setWriter(resultSet.getString("writer"));
+//                post.setCreatedAt(resultSet.getDate("created_at").toLocalDate());
+
+            }
+        } catch (Exception e) {
+            return null;
+        }
+
+
+        return null;
     }
 
     @Override
     public Optional<PostDTO> findById(long id) {
         return Optional.empty();
+    }
+
+    @Override
+    public boolean countAll() {
+        return false;
     }
 
     @Override

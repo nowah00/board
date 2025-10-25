@@ -1,5 +1,3 @@
-import com.ssg.board.dao.PostDAO;
-import com.ssg.board.dao.PostDAOImpl;
 import com.ssg.board.dto.PostDTO;
 import com.ssg.board.service.PostService;
 import org.junit.jupiter.api.BeforeEach;

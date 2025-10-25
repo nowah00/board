@@ -5,6 +5,8 @@ import com.ssg.board.dao.PostDAOImpl;
 import com.ssg.board.dto.PostDTO;
 import lombok.extern.log4j.Log4j2;
 
+import java.util.List;
+
 @Log4j2
 public enum PostService {
     INSTANCE;

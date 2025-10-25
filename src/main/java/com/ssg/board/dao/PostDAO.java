@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PostDAO {
-    List<PostDTO> findAll(int page, int size);
+    List<PostDTO> findAll();
     boolean countAll();
     Optional<PostDTO> findById(long id);
     long save(PostDTO post);
