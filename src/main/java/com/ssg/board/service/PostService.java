@@ -20,8 +20,11 @@ public enum PostService {
 
     // 검증 + 저장
     public long write(PostDTO post) {
+        log.info("[write() 호출]");
+
         long post_id = dao.save(post);
-        if (post_id > 0){
+
+        if (post_id > 0) {
             log.info("[" + post_id + " 생성 완료]");
             return post_id;
         } else {
@@ -32,9 +35,11 @@ public enum PostService {
 
     // 비번검증 + 수정
     public void edit(PostDTO post, String passphrase) {
-        if(dao.checkPassphrase(post.getPostId(), passphrase)){
+        log.info("[edit() 호출]");
+
+        if (dao.checkPassphrase(post.getPostId(), passphrase)) {
             log.info("[권한 확인 완료]");
-            if (dao.update(post)){
+            if (dao.update(post)) {
                 log.info("[" + post.getPostId() + " 수정 완료]");
             } else {
                 log.info("[수정 실패]");
@@ -44,5 +49,19 @@ public enum PostService {
         }
     }
 
-//    public void remove(long id, String passphrase) { ... }     // 비번검증 + 삭제
+    // 비번검증 + 삭제
+    public void remove(long id, String passphrase) {
+        log.info("[remove() 호출]");
+
+        if (dao.checkPassphrase(id, passphrase)) {
+            log.info("[권한 확인 완료]");
+            if (dao.delete(id)) {
+                log.info("[" + id + " 삭제 완료]");
+            } else {
+                log.info("[삭제 실패]");
+            }
+        } else {
+            log.info("[권한 확인 실패]");
+        }
+    }
 }

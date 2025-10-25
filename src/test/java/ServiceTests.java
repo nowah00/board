@@ -37,4 +37,11 @@ public class ServiceTests {
                 .build();
         postService.edit(postDTO, postDTO.getPassphrase());
     }
+
+    @Test
+    public void testDeleteService() {
+        long postId = 4L;
+        String passphrase = "원숭이";
+        postService.remove(postId, passphrase);
+    }
 }
